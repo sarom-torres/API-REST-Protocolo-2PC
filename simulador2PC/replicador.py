@@ -3,10 +3,11 @@ from flask import Flask, jsonify, request, abort
 from gerenciador import leitura_arq
 import Tipo
 
+tipo = ""
 log = Flask(__name__)
 contas = leitura_arq()
 replicas = []
-tipo = ""
+acoes = []
 
 #retorna as contas em log
 @log.route('/contas',methods=['GET'])
@@ -24,7 +25,6 @@ def carregar_replicas():
 
     replicas = request.json['replicas']
     tipo = 'coordenador'
-
     return jsonify({'replicas': replicas}),201
 
 @log.route('/replicas',methods=['DELETE'])
@@ -36,17 +36,29 @@ def excluir_replicas():
     tipo = 'replicas'
     return jsonify('replicas',replicas)
 
+#
+@log.route('/contas/transacao',methods=['PUT'])
+def enviar_acao():
+    if tipo == 'coordenador':
+        replicas.append(request.json)
+    else:
+        abort(404)
+
+#request p/
+
+
 
 if __name__ == "__main__":
 
+    #argv[1] host
+    #argv[2] tipo
     #argv para definir se o simulador será coordenado 'c' ou réplica 'r'
-    if sys.argv[1] == 'c':
+    if sys.argv[2] == 'c':
         tipo = 'coordenador'
     else:
         tipo = 'replica'
 
     print(tipo, "online...")
+    log.run(host="0.0.0.0",port=sys.argv[1],debug=True)
 
-
-    log.run(host='0.0.0.0',debug=True)
 
