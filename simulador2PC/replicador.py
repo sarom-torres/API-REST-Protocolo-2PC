@@ -31,6 +31,7 @@ def carregar_replicas():
     tipo = 'coordenador'
     return jsonify({'replicas': replicas}),201
 
+#exclui replicas
 @log.route('/replicas',methods=['DELETE'])
 def excluir_replicas():
     global tipo
@@ -38,6 +39,14 @@ def excluir_replicas():
         abort(404)
     replicas.clear()
     tipo = 'replicas'
+    return jsonify('replicas',replicas)
+
+#obtem lista de replicas
+@log.route('/replicas',methods=['GET'])
+def obtem_replicas():
+    global replicas
+    if len(replicas)==0:
+        abort(404)
     return jsonify('replicas',replicas)
 
 #
@@ -49,7 +58,7 @@ def enviar_acao():
 #       r = requests.get('http://www.google.com')
         endereco = replicas[0]["endpoint"]+"/contas/transacao"
         print(endereco)
-        r = requests.put(endereco)
+        r = requests.put(endereco,transacoes[0])
         #,transacoes[0]
         #jsonify({"resposta": r}), 200
         return jsonify({"qq":"coisa"})
