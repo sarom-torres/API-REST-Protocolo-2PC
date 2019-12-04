@@ -5,5 +5,10 @@ import json
 def leitura_arq():
     arquivo = open('dados.txt', 'r')
     dados = arquivo.read()
-    return json.loads(dados)['contas']
+    dados_dic = json.loads(dados)
+    return dados_dic['contas']
 
+def escrever_arq(contas):
+    arquivo = open('dados.txt', 'w')
+    arquivo.writelines(json.dump({'contas':contas}))
+    arquivo.close()
