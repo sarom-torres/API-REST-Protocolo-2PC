@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="45245801-77cb-4c1c-b8dc-7914e7dd8969" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/dados.txt" beforeDir="false" afterPath="$PROJECT_DIR$/dados.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gerenciador.py" beforeDir="false" afterPath="$PROJECT_DIR$/gerenciador.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/replicador.py" beforeDir="false" afterPath="$PROJECT_DIR$/replicador.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,8 +16,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/replicador.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="977">
-              <caret line="132" selection-start-line="132" selection-end-line="132" selection-end-column="71" />
+            <state relative-caret-position="-1170">
+              <caret line="90" column="57" lean-forward="true" selection-start-line="90" selection-start-column="57" selection-end-line="90" selection-end-column="57" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
                 <element signature="e#733#922#0" />
@@ -247,12 +246,12 @@
       <workItem from="1575115391485" duration="295000" />
       <workItem from="1575219714998" duration="9259000" />
       <workItem from="1575473720282" duration="13052000" />
-      <workItem from="1575568072830" duration="10044000" />
+      <workItem from="1575568072830" duration="11865000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="61517000" />
+    <option name="totallyTimeSpent" value="63338000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -295,9 +294,9 @@
     <option name="version" value="1" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/simulador2PC$replicador.coverage" NAME="replicador Coverage Results" MODIFIED="1575581863447" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/simulador2PC$replicador_2.coverage" NAME="replicador 2 Coverage Results" MODIFIED="1575581863574" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/simulador2PC$replicador_3.coverage" NAME="replicador 3 Coverage Results" MODIFIED="1575581863335" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/simulador2PC$replicador.coverage" NAME="replicador Coverage Results" MODIFIED="1575584713415" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/simulador2PC$replicador_2.coverage" NAME="replicador 2 Coverage Results" MODIFIED="1575584713542" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/simulador2PC$replicador_3.coverage" NAME="replicador 3 Coverage Results" MODIFIED="1575584713287" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/venv/lib/python3.5/site-packages/flask/app.py">
@@ -351,8 +350,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/replicador.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="977">
-          <caret line="132" selection-start-line="132" selection-end-line="132" selection-end-column="71" />
+        <state relative-caret-position="-1170">
+          <caret line="90" column="57" lean-forward="true" selection-start-line="90" selection-start-column="57" selection-end-line="90" selection-end-column="57" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
             <element signature="e#733#922#0" />

@@ -79,6 +79,8 @@ def enviar_acao():
     global replicas
     global transacoes
     global seed
+    global acoes
+
     dic_trans = request.json
     transacoes.append(dic_trans)
     print("dic=>", dic_trans)
@@ -97,14 +99,14 @@ def enviar_acao():
             if(put1.status_code==200 and put2.status_code==200):
                 realiza_transacao(transacoes[0])
                 escrever_arq(contas)
+                acoes.append({'id':transacoes[0]['id'],'status':'success'})
                 transacoes.clear()
-                print(transacoes)
             return Response(status=201, mimetype='application/json')
         else:
             requests.delete(enderecoR1)
             requests.delete(enderecoR2)
+            acoes.append({'id': transacoes[0]['id'], 'status': 'fail'})
             transacoes.clear()
-            print(transacoes)
             return Response(status=403, mimetype='application/json')
     #replica
     else:
@@ -120,7 +122,6 @@ def enviar_acao():
 def enviar_confirmacao():
     global transacoes
     global contas
-    global acoes
     decisao_id = request.json
 
     if(tipo == 'coordenador'):
@@ -130,7 +131,6 @@ def enviar_confirmacao():
             if(transacao ['id'] == decisao_id['id']):
                 realiza_transacao(transacao)
                 escrever_arq(contas)
-                acoes.append({'id':transacao['id'],'status':'success'})
                 return Response(status=200, mimetype='application/json')
         return Response(status=404, mimetype='application/json')
 
@@ -142,7 +142,6 @@ def enviar_cancelamento():
     else:
         if(len(transacoes)!=0):
             trans = transacoes.get(0)
-            acoes.append({'id': trans['id'], 'status': 'fail'})
             transacoes.remove(0)
             return Response(status=200, mimetype='application/json')
         else:
