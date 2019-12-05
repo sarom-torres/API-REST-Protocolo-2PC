@@ -9,6 +9,5 @@ def leitura_arq():
     return dados_dic['contas']
 
 def escrever_arq(contas):
-    arquivo = open('dados.txt', 'w')
-    arquivo.writelines(json.dump({'contas':contas}))
-    arquivo.close()
+    with open('dados.txt', 'w') as outfile:
+        json.dump({'contas':contas},outfile)
