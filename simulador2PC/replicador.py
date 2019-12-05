@@ -59,18 +59,16 @@ def obtem_replicas():
         abort(404)
     return jsonify('replicas',replicas)
 
-# carrega semente
+# carrega semente no coordenador e repassa para as réplicas
 @log.route('/seed',methods=['POST'])
 def carregar_semente():
     global seed
     seed = request.json['seed']
-    print(seed)
     if(tipo == 'coordenador'):
-        enderecoR1 = replicas[0]["endpoint"]+"/transacao"
-        enderecoR2 = replicas[1]["endpoint"]+"/transacao"
-        r1 = requests.put(enderecoR1,seed)
-        r2 = requests.put(enderecoR2,seed)
-
+        enderecoR1 = replicas[0]["endpoint"]+"/seed"
+        enderecoR2 = replicas[1]["endpoint"]+"/seed"
+        r1 = requests.post(enderecoR1,json=request.json)
+        r2 = requests.post(enderecoR2,json=request.json)
     random.seed(int(seed))
     return Response(status=201, mimetype='application/json')
 
@@ -170,8 +168,6 @@ def obter_historico():
     return jsonify({'acoes': acoes})
 
 if __name__ == "__main__":
-
-
     print(tipo, "online...")
     log.run(host="0.0.0.0",port=sys.argv[1],debug=True)
 
