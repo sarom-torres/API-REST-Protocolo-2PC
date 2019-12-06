@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="45245801-77cb-4c1c-b8dc-7914e7dd8969" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dados.txt" beforeDir="false" afterPath="$PROJECT_DIR$/dados.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/replicador.py" beforeDir="false" afterPath="$PROJECT_DIR$/replicador.py" afterDir="false" />
     </list>
@@ -16,15 +17,25 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/replicador.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1170">
-              <caret line="90" column="57" lean-forward="true" selection-start-line="90" selection-start-column="57" selection-end-line="90" selection-end-column="57" />
+            <state relative-caret-position="216">
+              <caret line="116" column="2" selection-start-line="116" selection-end-line="116" selection-end-column="49" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
-                <element signature="e#733#922#0" />
-                <element signature="e#1012#1152#0" />
-                <element signature="e#1245#1344#0" />
-                <element signature="e#1429#1810#0" />
+                <element signature="e#548#631#0" />
+                <element signature="e#737#926#0" />
+                <element signature="e#1016#1160#0" />
+                <element signature="e#1253#1356#0" />
+                <element signature="e#1522#1706#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/venv/lib/python3.5/site-packages/flask/app.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="167">
+              <caret line="97" selection-start-line="97" selection-end-line="97" />
             </state>
           </provider>
         </entry>
@@ -60,7 +71,7 @@
         <entry file="file://$PROJECT_DIR$/dados.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="87" selection-start-column="87" selection-end-column="87" />
+              <caret column="126" selection-start-column="126" selection-end-column="126" />
             </state>
           </provider>
         </entry>
@@ -120,6 +131,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
     <option name="configurationTypes">
@@ -246,12 +258,14 @@
       <workItem from="1575115391485" duration="295000" />
       <workItem from="1575219714998" duration="9259000" />
       <workItem from="1575473720282" duration="13052000" />
-      <workItem from="1575568072830" duration="11865000" />
+      <workItem from="1575568072830" duration="14676000" />
+      <workItem from="1575642684711" duration="1112000" />
+      <workItem from="1575656714029" duration="5075000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="63338000" />
+    <option name="totallyTimeSpent" value="72336000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -263,10 +277,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1044" extended-state="6" />
+    <frame x="-4" y="0" width="1928" height="1048" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1433942" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14769065" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -294,15 +308,22 @@
     <option name="version" value="1" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/simulador2PC$replicador.coverage" NAME="replicador Coverage Results" MODIFIED="1575584713415" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/simulador2PC$replicador_2.coverage" NAME="replicador 2 Coverage Results" MODIFIED="1575584713542" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/simulador2PC$replicador_3.coverage" NAME="replicador 3 Coverage Results" MODIFIED="1575584713287" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/simulador2PC$replicador.coverage" NAME="replicador Coverage Results" MODIFIED="1575661022667" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/simulador2PC$replicador_2.coverage" NAME="replicador 2 Coverage Results" MODIFIED="1575661022818" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/simulador2PC$replicador_3.coverage" NAME="replicador 3 Coverage Results" MODIFIED="1575661022533" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/venv/lib/python3.5/site-packages/flask/app.py">
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.5/site-packages/requests/api.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="97" selection-start-line="97" selection-end-line="97" />
+        <state relative-caret-position="176">
+          <caret line="118" column="4" selection-start-line="118" selection-start-column="4" selection-end-line="118" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/lib/python3.5/json/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="318" selection-start-line="318" selection-end-line="318" />
         </state>
       </provider>
     </entry>
@@ -313,24 +334,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/venv/lib/python3.5/site-packages/requests/api.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="118" column="4" selection-start-line="118" selection-start-column="4" selection-end-line="118" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Tipo.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
           <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/lib/python3.5/json/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="318" selection-start-line="318" selection-end-line="318" />
         </state>
       </provider>
     </entry>
@@ -344,20 +351,28 @@
     <entry file="file://$PROJECT_DIR$/dados.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="87" selection-start-column="87" selection-end-column="87" />
+          <caret column="126" selection-start-column="126" selection-end-column="126" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.5/site-packages/flask/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="97" selection-start-line="97" selection-end-line="97" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/replicador.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1170">
-          <caret line="90" column="57" lean-forward="true" selection-start-line="90" selection-start-column="57" selection-end-line="90" selection-end-column="57" />
+        <state relative-caret-position="216">
+          <caret line="116" column="2" selection-start-line="116" selection-end-line="116" selection-end-column="49" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
-            <element signature="e#733#922#0" />
-            <element signature="e#1012#1152#0" />
-            <element signature="e#1245#1344#0" />
-            <element signature="e#1429#1810#0" />
+            <element signature="e#548#631#0" />
+            <element signature="e#737#926#0" />
+            <element signature="e#1016#1160#0" />
+            <element signature="e#1253#1356#0" />
+            <element signature="e#1522#1706#0" />
           </folding>
         </state>
       </provider>

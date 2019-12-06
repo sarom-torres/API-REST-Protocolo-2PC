@@ -26,7 +26,7 @@ seed = ''
 def obter_contas():
     global contas
     contas = leitura_arq()
-    return jsonify({'contas': contas})
+    return jsonify({'contas': contas}),200
 
 #carrega as replicas em uma lista
 @log.route('/replicas',methods=['POST'])
@@ -49,7 +49,7 @@ def excluir_replicas():
         abort(404)
     replicas.clear()
     tipo = 'replicas'
-    return jsonify('replicas',replicas)
+    return jsonify('replicas',replicas),200
 
 #obtem lista de replicas
 @log.route('/replicas',methods=['GET'])
@@ -57,23 +57,19 @@ def obtem_replicas():
     global replicas
     if len(replicas)==0:
         abort(404)
-    return jsonify('replicas',replicas)
+    return jsonify('replicas',replicas),200
 
 # carrega semente no coordenador e repassa para as réplicas
+#@log.route('/seed',methods=[{'POST','GET'}])
 @log.route('/seed',methods=['POST'])
 def carregar_semente():
+
     global seed
     seed = request.json['seed']
-    if(tipo == 'coordenador'):
-        enderecoR1 = replicas[0]["endpoint"]+"/seed"
-        enderecoR2 = replicas[1]["endpoint"]+"/seed"
-        r1 = requests.post(enderecoR1,json=request.json)
-        r2 = requests.post(enderecoR2,json=request.json)
     random.seed(int(seed))
     return Response(status=201, mimetype='application/json')
 
 #Realiza transação
-#TODO está correto ser PUT ou deveria ser POST
 @log.route('/transacao',methods=['POST'])
 def enviar_acao():
     global replicas
@@ -118,34 +114,53 @@ def enviar_acao():
             return Response(status=403, mimetype='application/json')
 
 
-@log.route('/transacao',methods=['PUT'])
+@log.route('/transacao',methods=['PUT','DELETE'])
 def enviar_confirmacao():
     global transacoes
     global contas
+    global acoes
     decisao_id = request.json
 
-    if(tipo == 'coordenador'):
-        return Response(status=400, mimetype='application/json')
-    else:
-        for transacao in transacoes:
-            if(transacao ['id'] == decisao_id['id']):
-                realiza_transacao(transacao)
-                escrever_arq(contas)
-                return Response(status=200, mimetype='application/json')
-        return Response(status=404, mimetype='application/json')
+    if request.method == 'PUT':
 
-@log.route('/transacao',methods=['DELETE'])
-def enviar_cancelamento():
-    global transacoes
-    if(tipo == 'coordenador'):
-        return Response(status=400, mimetype='application/json')
-    else:
-        if(len(transacoes)!=0):
-            trans = transacoes.get(0)
-            transacoes.remove(0)
-            return Response(status=200, mimetype='application/json')
+        if(tipo == 'coordenador'):
+            return Response(status=400, mimetype='application/json')
         else:
+            for transacao in transacoes:
+                if(transacao ['id'] == decisao_id['id']):
+                    realiza_transacao(transacao)
+                    escrever_arq(contas)
+                    acoes.append({'id': transacao['id'], 'status': 'success'})
+                    return Response(status=200, mimetype='application/json')
             return Response(status=404, mimetype='application/json')
+
+    elif request.method == 'DELETE':
+        if (tipo == 'coordenador'):
+            return Response(status=400, mimetype='application/json')
+        else:
+            if (len(transacoes) != 0):
+                trans = transacoes[0]
+                del(transacoes[0])
+                acoes.append({'id': trans['id'], 'status': 'fail'})
+                return Response(status=200, mimetype='application/json')
+            else:
+                return Response(status=404, mimetype='application/json')
+
+
+#@log.route('/transacao',methods=['DELETE'])
+#def enviar_cancelamento():
+#    global transacoes
+#    global acoes
+#    if(tipo == 'coordenador'):
+#        return Response(status=400, mimetype='application/json')
+#    else:
+#        if(len(transacoes)!=0):
+#            trans = transacoes.get(0)
+#            transacoes.remove(0)
+#            acoes.append({'id': trans['id'], 'status': 'fail'})
+#            return Response(status=200, mimetype='application/json')
+#        else:
+#            return Response(status=404, mimetype='application/json')
 
 
 @log.route('/historico',methods=['GET'])
