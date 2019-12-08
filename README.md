@@ -10,20 +10,38 @@ A aplicação coordenador é responsável pela interação com o usuário e pelo
 são responsáveis por realizar a votação e persistir os dados atualizados em disco. No final da simulação todas as deverão possuir
 mesmos dados em log.
 
-## Definição do projeto
-
+## Ambiente de execução
 
 O projeto foi desenvolvido em Python3 e para sua execução é recomendado a criação de um [ambiente virtual](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/) e a instalação das
 seguintes bibliotecas python:
 
-* [flask] (https://flask-ptbr.readthedocs.io/en/latest/installation.html). Sua instalação poderá ser feita da seguinte maneira:
+* [flask](https://flask-ptbr.readthedocs.io/en/latest/installation.html). Sua instalação poderá ser feita da seguinte maneira:
 ```
 pip install flask
 ```
 
-* [requests] (https://requests.readthedocs.io/pt_BR/latest/user/install.html). Sua instalação poderá ser feita a partir do seguinte comando:
+* [requests](https://requests.readthedocs.io/pt_BR/latest/user/install.html). Sua instalação poderá ser feita a partir do seguinte comando:
 ```
 pip install requests
 ```
+* Outras bibliotecas necessárias estão no arquivo requirements.txt
 
+## Executando a API
+
+A API desenvolvida está no arquivo `replicador.py` e ao ser executada o seguinte parâmetro deve ser passados na linha de comando:
+* porta : porta no qual o processo estará rodando
+
+A execução deverá ser feita da seguinte maneira:
+```
+python3 replicador.py porta
+```
+Exemplo:
+```
+python3 replicador.py 5000
+```
+Para rodar o cenário de replicação através do 2PC será necessária a execução de três processos com três portas diferentes.
+
+## Utilizando os recursos da API
+
+Após a executar os três processos basta seguir a documentação da [API](https://github.com/STD29006-classroom/2019-02-projeto-pratico-02-sarom-torres/blob/master/apiary.apib) para fazer o registro de log. 
 
