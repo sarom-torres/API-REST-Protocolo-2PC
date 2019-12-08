@@ -47,10 +47,16 @@ def carregar_replicas():
     global replicas
     global tipo
 
-    if not request.json:
+    replicas = request.json['replicas']
+
+    enderecoR1 = replicas[0]["endpoint"] + "/replicas"
+    enderecoR2 = replicas[1]["endpoint"] + "/replicas"
+    r1 = requests.get(enderecoR1)
+    r2 = requests.get(enderecoR2)
+
+    if not request.json or r1.status_code==200 or r2.status_code==200:
         return Response(status=404, mimetype='application/json')
 
-    replicas = request.json['replicas']
     tipo = 'coordenador'
     return Response(status=201, mimetype='application/json')
 
@@ -61,7 +67,7 @@ def excluir_replicas():
     if len(replicas) == 0:
         return Response(status=404, mimetype='application/json')
     replicas.clear()
-    tipo = 'replicas'
+    tipo = 'replica'
     return Response(status=200, mimetype='application/json')
 
 #obtem lista de replicas
@@ -92,6 +98,7 @@ def enviar_acao():
     global acoes
     dic_trans = request.json
     transacoes.append(dic_trans)
+    print(tipo)
     #coordenador
     if tipo == 'coordenador':
         id = dic_trans['id']

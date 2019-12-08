@@ -3,8 +3,7 @@ HOST : http://localhost:12345
 
 # Simulador do protocolo 2PC
 
-A aplicação implementa o protocolo 2PC para registro e log de contas bancárias, 
-mantendo as contas atualizadas, além de prover backup das informações em réplicas.
+A aplicação implementa o protocolo 2PC para registro e log de contas bancárias.
 
 #Group 2PC
 
@@ -14,22 +13,22 @@ mantendo as contas atualizadas, além de prover backup das informações em rép
 
 + Response 200 (appĺication/json)
 
-{
-    "contas" :[
         {
-            "numero" : "1234",
-            "saldo" : "100.00"
-        },
-        {
-            "numero" : "4345",
-            "saldo" : "50.00"
-        },
-        {
-            "numero" : "5678",
-            "saldo" : "250.00"
+            "contas" :[
+                {
+                    "numero" : "1234",
+                    "saldo" : "100.00"
+                },
+                {
+                    "numero" : "4345",
+                    "saldo" : "50.00"
+                },
+                {
+                    "numero" : "5678",
+                    "saldo" : "250.00"
+                }
+            ]
         }
-    ]
-}
 
 ## Réplicas [/replicas]
 
@@ -41,18 +40,18 @@ Para adicionar uma lista de máquinas réplicas. Recebe um objeto JSON contendo 
 
 + Request (appĺication/json)
 
-{
-    "replicas": [
         {
-            "id": "9aced3dd-aa11-4010-b8fa-dbfbd4fd4f6d",
-            "endpoint": "http://127.0.0.1:5000"
-        },
-        {
-            "id": "37e079a0-c00b-4c3b-b32c-98a71dc1d6e9",
-            "endpoint": "http://127.0.0.1/1234"
-        }
-    ]
-}    
+            "replicas": [
+                {
+                    "id": "9aced3dd-aa11-4010-b8fa-dbfbd4fd4f6d",
+                    "endpoint": "http://127.0.0.1:5000"
+                },
+                {
+                    "id": "37e079a0-c00b-4c3b-b32c-98a71dc1d6e9",
+                    "endpoint": "http://127.0.0.1/1234"
+                }
+            ]
+        }    
       
 + Response 201 
 
@@ -62,18 +61,21 @@ Para adicionar uma lista de máquinas réplicas. Recebe um objeto JSON contendo 
 ### Obter lista de réplicas [GET]
 Retorna a lista de réplicas
 + Response 200 (appĺication/json)
-{
-    "replicas": [
-        {
-            "id": "9aced3dd-aa11-4010-b8fa-dbfbd4fd4f6d",
-            "endpoint": "http://127.0.0.1:5000"
-        },
-        {
-            "id": "37e079a0-c00b-4c3b-b32c-98a71dc1d6e9",
-            "endpoint": "http://127.0.0.1/1234"
-        }
-    ]
-}
+    
+    + Body
+    
+            {
+                "replicas": [
+                    {
+                        "id": "9aced3dd-aa11-4010-b8fa-dbfbd4fd4f6d",
+                        "endpoint": "http://127.0.0.1:5000"
+                    },
+                    {
+                        "id": "37e079a0-c00b-4c3b-b32c-98a71dc1d6e9",
+                        "endpoint": "http://127.0.0.1/1234"
+                    }
+                ]
+            }
 
 + Response 404
 
@@ -89,9 +91,12 @@ Retorna a lista de réplicas
 Para adicionar semente nos sistemas.
 + seed (string) - Valor da semente
 + Request (appĺication/json)
-{
-    "seed": "987246"
-}
+
+    + Body
+    
+            {
+                "seed": "987246"
+            }
 
 + Response 201
 
@@ -104,12 +109,15 @@ Para adicionar transacoes a serem realizadas.
 + conta (string) - Número da conta
 + valor (string) - Valor associado à transação
 + Request (appĺication/json)
-{
-    "id": "1e7a0527-f233-4dd4-a5e4-5d007930dd19",
-    "operacao": "credito",
-    "conta": "1234",
-    "valor": "30.00"
-}
+    
+    + Body
+    
+            {
+                "id": "1e7a0527-f233-4dd4-a5e4-5d007930dd19",
+                "operacao": "credito",
+                "conta": "1234",
+                "valor": "30.00"
+            }
 + Response 200
 + Response 201
 + Response 403
@@ -118,9 +126,12 @@ Para adicionar transacoes a serem realizadas.
 Para confirmar a transação.
 + id (string) - Identificador da transação
 + Request (appĺication/json)
-{
-    "id": "9aced3dd-aa11-4010-b8fa-dbfbd4fd4f6d"
-}
+
+    + Body
+    
+            {
+                "id": "9aced3dd-aa11-4010-b8fa-dbfbd4fd4f6d"
+            }
 
 + Response 200
 + Response 400
@@ -130,9 +141,12 @@ Para confirmar a transação.
 Para cancelar a transação.
 + id (string) - Identificador da transação
 + Request (appĺication/json)
-{
-    "id": "9aced3dd-aa11-4010-b8fa-dbfbd4fd4f6d"
-}
+
+    + Body
+    
+            {
+                "id": "9aced3dd-aa11-4010-b8fa-dbfbd4fd4f6d"
+            }
 
 + Response 200
 + Response 400
@@ -143,15 +157,18 @@ Para cancelar a transação.
 Para obter id e status de todas operações processadas
 
 + Response 200 (appĺication/json)
-{
-  "acoes": [
-    {
-      "id": "1e7a0527-f233-4dd4-a5e4-5d007930dd19",
-      "status": "fail"
-    },
-    {
-      "id": "2b41abfd-2f57-4b04-8e23-ac98d37fce65",
-      "status": "success"
-    }
-  ]
-}
+
+    + Body
+    
+            {
+                "acoes": [
+                    {
+                    "id": "1e7a0527-f233-4dd4-a5e4-5d007930dd19",
+                    "status": "fail"
+                    },
+                    {
+                    "id": "2b41abfd-2f57-4b04-8e23-ac98d37fce65",
+                    "status": "success"
+                    }
+                ]
+            }
