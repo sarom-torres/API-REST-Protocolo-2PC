@@ -35,6 +35,10 @@ mantendo as contas atualizadas, além de prover backup das informações em rép
 
 ### Carregar uma lista de réplicas [POST]
 
+Para adicionar uma lista de máquinas réplicas. Recebe um objeto JSON contendo os dados das máquinas.
++ id (string) - Identificador único da réplica
++ endpoint (string) - Endereço IP da máquina e porta
+
 + Request (appĺication/json)
 
 {
@@ -52,7 +56,8 @@ mantendo as contas atualizadas, além de prover backup das informações em rép
       
 + Response 201 
 
-    + Body
++ Response 404
+
 
 ### Obter lista de réplicas [GET]
 
@@ -70,9 +75,12 @@ mantendo as contas atualizadas, além de prover backup das informações em rép
     ]
 }
 
++ Response 404
+
 ### Excluir a lista de réplicas [DELETE]
 
 + Response 200
++ Response 404
 
 ## Sementes [/seed]
 
@@ -84,4 +92,19 @@ mantendo as contas atualizadas, além de prover backup das informações em rép
 }
 
 + Response 201
+
+## Transações [/transacao]
+
+### Envia ação a ser realizada pelas réplicas [POST]
+
++ Request (appĺication/json)
+{
+    "id": "1e7a0527-f233-4dd4-a5e4-5d007930dd19",
+    "operacao": "credito",
+    "conta": "1234",
+    "valor": "30.00"
+}
++ Response 201
+
++ Response 403
 

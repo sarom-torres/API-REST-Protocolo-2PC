@@ -4,12 +4,22 @@ import requests
 import random
 import json
 
-from gerenciador import leitura_arq, escrever_arq
-import Tipo
-
-#tipo = Tipo()
-tipo = ""
+#from gerenciador import leitura_arq, escrever_arq
 log = Flask(__name__)
+
+#-Leitura e escrita em arquivo----------------------------------------------------------------------------------
+def leitura_arq():
+    arquivo = open('dados.txt', 'r')
+    dados = arquivo.read()
+    dados_dic = json.loads(dados)
+    return dados_dic['contas']
+
+def escrever_arq(contas):
+    with open('dados.txt', 'w') as outfile:
+        json.dump({'contas':contas},outfile)
+
+#-Variáveis globais--------------------------------------------------------------------------------------------
+tipo = ""
 #lista de contas carregadas a partir do disco
 contas = leitura_arq()
 #lista de replicas enviada pelo cliente
@@ -21,6 +31,7 @@ acoes = []
 seed = ''
 
 
+#-[/contas]----------------------------------------------------------------------------------------------------
 #retorna as contas em log
 @log.route('/contas',methods=['GET'])
 def obter_contas():
@@ -28,6 +39,8 @@ def obter_contas():
     contas = leitura_arq()
     return jsonify({'contas': contas}),200
 
+
+#-[/replicas]-----------------------------------------------------------------------------------------------------
 #carrega as replicas em uma lista
 @log.route('/replicas',methods=['POST'])
 def carregar_replicas():
@@ -35,32 +48,33 @@ def carregar_replicas():
     global tipo
 
     if not request.json:
-        abort(400)
+        return Response(status=404, mimetype='application/json')
 
     replicas = request.json['replicas']
     tipo = 'coordenador'
-    return jsonify({'replicas': replicas}),201
+    return Response(status=201, mimetype='application/json')
 
 #exclui replicas
 @log.route('/replicas',methods=['DELETE'])
 def excluir_replicas():
     global tipo
     if len(replicas) == 0:
-        abort(404)
+        return Response(status=404, mimetype='application/json')
     replicas.clear()
     tipo = 'replicas'
-    return jsonify('replicas',replicas),200
+    return Response(status=200, mimetype='application/json')
 
 #obtem lista de replicas
 @log.route('/replicas',methods=['GET'])
 def obtem_replicas():
     global replicas
     if len(replicas)==0:
-        abort(404)
+       return Response(status=404, mimetype='application/json')
     return jsonify('replicas',replicas),200
 
+
+#-[/seed]--------------------------------------------------------------------------------------------------------------
 # carrega semente no coordenador e repassa para as réplicas
-#@log.route('/seed',methods=[{'POST','GET'}])
 @log.route('/seed',methods=['POST'])
 def carregar_semente():
 
@@ -69,6 +83,7 @@ def carregar_semente():
     random.seed(int(seed))
     return Response(status=201, mimetype='application/json')
 
+#-[/transacao]---------------------------------------------------------------------------------------------------------
 #Realiza transação
 @log.route('/transacao',methods=['POST'])
 def enviar_acao():
@@ -146,27 +161,13 @@ def enviar_confirmacao():
             else:
                 return Response(status=404, mimetype='application/json')
 
-
-#@log.route('/transacao',methods=['DELETE'])
-#def enviar_cancelamento():
-#    global transacoes
-#    global acoes
-#    if(tipo == 'coordenador'):
-#        return Response(status=400, mimetype='application/json')
-#    else:
-#        if(len(transacoes)!=0):
-#            trans = transacoes.get(0)
-#            transacoes.remove(0)
-#            acoes.append({'id': trans['id'], 'status': 'fail'})
-#            return Response(status=200, mimetype='application/json')
-#        else:
-#            return Response(status=404, mimetype='application/json')
-
-
+#-[/historico]-------------------------------------------------------------------------------------------------
 @log.route('/historico',methods=['GET'])
 def obter_historico():
     return jsonify({'acoes': acoes})
 
+#-Funções auxiliares------------------------------------------------------------------------------------------
+#Função para realização de transfência
 def realiza_transacao(transacao):
     global contas
     for conta in contas:
@@ -181,7 +182,7 @@ def realiza_transacao(transacao):
 
 
 if __name__ == "__main__":
-    print(tipo, "online...")
     log.run(host="0.0.0.0",port=sys.argv[1],debug=True)
+    print("online...")
 
 
