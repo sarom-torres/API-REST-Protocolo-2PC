@@ -68,7 +68,7 @@ def excluir_replicas():
 @log.route('/replicas',methods=['GET'])
 def obtem_replicas():
     global replicas
-    if len(replicas)==0:
+    if len(replicas)==0 or tipo != "coordenador":
        return Response(status=404, mimetype='application/json')
     return jsonify('replicas',replicas),200
 
@@ -77,7 +77,6 @@ def obtem_replicas():
 # carrega semente no coordenador e repassa para as réplicas
 @log.route('/seed',methods=['POST'])
 def carregar_semente():
-
     global seed
     seed = request.json['seed']
     random.seed(int(seed))
@@ -91,17 +90,14 @@ def enviar_acao():
     global transacoes
     global seed
     global acoes
-
     dic_trans = request.json
     transacoes.append(dic_trans)
-    print("dic=>", dic_trans)
     #coordenador
     if tipo == 'coordenador':
         id = dic_trans['id']
         id_js = {"id": id}
         enderecoR1 = replicas[0]["endpoint"]+"/transacao"
         enderecoR2 = replicas[1]["endpoint"]+"/transacao"
-        print("trans0=>",transacoes[0])
         r1 = requests.post(enderecoR1,json=transacoes[0])
         r2 = requests.post(enderecoR2, json=transacoes[0])
         if (r1.status_code == 200 and r2.status_code == 200):
@@ -121,8 +117,7 @@ def enviar_acao():
             return Response(status=403, mimetype='application/json')
     #replica
     else:
-        rand = random.randint(1, 10)
-        print("Random",rand) #TODO o valor não vai até 10
+        rand = random.randint(1,11)
         if (rand <= 7):
             return Response(status=200, mimetype='application/json')
         else:
@@ -135,54 +130,48 @@ def enviar_confirmacao():
     global contas
     global acoes
     decisao_id = request.json
+    if (tipo == 'coordenador'):
+        return Response(status=400, mimetype='application/json')
 
     if request.method == 'PUT':
-
-        if(tipo == 'coordenador'):
-            return Response(status=400, mimetype='application/json')
-        else:
-            for transacao in transacoes:
-                if(transacao ['id'] == decisao_id['id']):
-                    realiza_transacao(transacao)
-                    escrever_arq(contas)
-                    acoes.append({'id': transacao['id'], 'status': 'success'})
-                    return Response(status=200, mimetype='application/json')
-            return Response(status=404, mimetype='application/json')
+        for transacao in transacoes:
+            if(transacao ['id'] == decisao_id['id']):
+                realiza_transacao(transacao)
+                escrever_arq(contas)
+                acoes.append({'id': transacao['id'], 'status': 'success'})
+                return Response(status=200, mimetype='application/json')
+        return Response(status=404, mimetype='application/json')
 
     elif request.method == 'DELETE':
-        if (tipo == 'coordenador'):
-            return Response(status=400, mimetype='application/json')
+        if (len(transacoes) != 0):
+            trans = transacoes[0]
+            del(transacoes[0])
+            acoes.append({'id': trans['id'], 'status': 'fail'})
+            return Response(status=200, mimetype='application/json')
         else:
-            if (len(transacoes) != 0):
-                trans = transacoes[0]
-                del(transacoes[0])
-                acoes.append({'id': trans['id'], 'status': 'fail'})
-                return Response(status=200, mimetype='application/json')
-            else:
-                return Response(status=404, mimetype='application/json')
+            return Response(status=404, mimetype='application/json')
 
 #-[/historico]-------------------------------------------------------------------------------------------------
 @log.route('/historico',methods=['GET'])
 def obter_historico():
-    return jsonify({'acoes': acoes})
+    return jsonify({'acoes': acoes}),200
 
 #-Funções auxiliares------------------------------------------------------------------------------------------
-#Função para realização de transfência
+#Função para realização de transferência (usada nas funções enviar_confirmacao() e enviar_acao())
 def realiza_transacao(transacao):
     global contas
     for conta in contas:
         if (conta['numero'] == transacao['conta']):
             if(transacao['operacao']=='debito'):
                 conta['saldo'] = str(float(conta['saldo']) - float(transacao['valor']))
-                print ("Saldo apos debito:",conta['saldo'])
             else:
                 conta['saldo'] = str(float(conta['saldo']) + float(transacao['valor']))
-                print("Saldo apos credito:", conta['saldo'])
             break
 
 
 if __name__ == "__main__":
-    log.run(host="0.0.0.0",port=sys.argv[1],debug=True)
     print("online...")
+    log.run(host="0.0.0.0",port=sys.argv[1],debug=True)
+
 
 

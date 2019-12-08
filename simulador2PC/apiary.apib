@@ -60,7 +60,7 @@ Para adicionar uma lista de máquinas réplicas. Recebe um objeto JSON contendo 
 
 
 ### Obter lista de réplicas [GET]
-
+Retorna a lista de réplicas
 + Response 200 (appĺication/json)
 {
     "replicas": [
@@ -86,6 +86,8 @@ Para adicionar uma lista de máquinas réplicas. Recebe um objeto JSON contendo 
 
 ### Carregar semente [POST]
 
+Para adicionar semente nos sistemas.
++ seed (string) - Valor da semente
 + Request (appĺication/json)
 {
     "seed": "987246"
@@ -96,7 +98,11 @@ Para adicionar uma lista de máquinas réplicas. Recebe um objeto JSON contendo 
 ## Transações [/transacao]
 
 ### Envia ação a ser realizada pelas réplicas [POST]
-
+Para adicionar transacoes a serem realizadas.
++ id (string) - Identificador único da transação
++ operacao (string) - Operação a ser realizada (cŕedito ou débito)
++ conta (string) - Número da conta
++ valor (string) - Valor associado à transação
 + Request (appĺication/json)
 {
     "id": "1e7a0527-f233-4dd4-a5e4-5d007930dd19",
@@ -104,7 +110,48 @@ Para adicionar uma lista de máquinas réplicas. Recebe um objeto JSON contendo 
     "conta": "1234",
     "valor": "30.00"
 }
++ Response 200
 + Response 201
-
 + Response 403
 
+### Confirmar transação [PUT]
+Para confirmar a transação.
++ id (string) - Identificador da transação
++ Request (appĺication/json)
+{
+    "id": "9aced3dd-aa11-4010-b8fa-dbfbd4fd4f6d"
+}
+
++ Response 200
++ Response 400
++ Response 404
+
+### Cancelar transação [DELETE]
+Para cancelar a transação.
++ id (string) - Identificador da transação
++ Request (appĺication/json)
+{
+    "id": "9aced3dd-aa11-4010-b8fa-dbfbd4fd4f6d"
+}
+
++ Response 200
++ Response 400
++ Response 404
+## Histórico [/historico]
+
+### Obter histórico de ações processadas [GET]
+Para obter id e status de todas operações processadas
+
++ Response 200 (appĺication/json)
+{
+  "acoes": [
+    {
+      "id": "1e7a0527-f233-4dd4-a5e4-5d007930dd19",
+      "status": "fail"
+    },
+    {
+      "id": "2b41abfd-2f57-4b04-8e23-ac98d37fce65",
+      "status": "success"
+    }
+  ]
+}
