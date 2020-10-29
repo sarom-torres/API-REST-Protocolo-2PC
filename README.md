@@ -1,4 +1,4 @@
-# Replicação mestre escravo
+# Replicação coordenador/réplicas
 
 > Engenharia de Telecomunicações - Sistemas Distribuídos (STD29006)
 >
@@ -43,5 +43,5 @@ Para rodar o cenário de replicação através do 2PC será necessária a execu�
 
 ## Utilizando os recursos da API
 
-Após a executar os três processos basta seguir a documentação da [API](https://github.com/STD29006-classroom/2019-02-projeto-pratico-02-sarom-torres/blob/master/apiary.apib) para fazer o registro de log. 
+Após a executar os três processos basta seguir a documentação da [API](https://github.com/sarom-torres/API-REST-Protocolo-2PC/blob/master/apiary.apib) para fazer o registro de log. 
 
